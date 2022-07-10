@@ -1,0 +1,21 @@
+Hello CS50! There is a way to do pset2 Crack even for the less comfortable. No spoilers ahead. Just a walkthrough on how to tackle this and save a lot of time. If you did Caesar and Vigenere, then no extra knowledge or experience is needed. It a nice adventure.
+You can do it in less than 70 lines of code. No recursion. No nested loops. With any salt (not necessarily “50”) without changing the code. With any length of password.
+1. The real problem is how to generate all possible passwords from “A” to “zzzzz”. So, forget about the hash input and crypt and its salt for now. Just figure out how to generate the passwords.
+2. Start by assuming that passwords are only capital letters. Let’s worry about the switch to small letters later.
+3. Start by assuming that the password length is 1 then 2 then 3 and generate passwords for each case. Don’t start your solution by assuming the password length is 5. When moving from 1 to 2 to 3, don’t simply nest 3 loops. Figure something else out. If you succeed, then the same solution will work for any password length.
+4. Use flow charts. Don’t even think about typing a single letter of code before designing the application on paper.  Things can get nasty and flow charts will save your life. 
+It’s essential for any developer. If you’re not familiar with flow charts, then watch a few minutes video about it.
+5. Use a table on paper (or in Excel) to track your variables while going through the flow chart.
+6. Make sure you generate all possible values without skipping for example “AAA” or “ZZZ”.
+7. When you’re satisfied with on-paper results, go for the code. Use debug50 to track your variables like the table did on paper.
+8. You may want to save all generated passwords to a file so you can review it later, instead of losing them scrolling in the terminal. To do this, you can use the command:  ./crack > crack.txt
+This will simply take all the output from ./crack and put it in a file called crack.txt without displaying the output in the terminal.
+Be aware however, that the file can get too large to the point it will not open correctly (or not open at all) inside the CS50 IDE. You can download it to your computer and open it locally. You may also try this on CS50 Sandbox. It has different limitations.
+9. If all is good, then add small letters to the game.
+10. Finally, take the hash input from the user and see how to compare the hash for each generated password with the hash input for a match.
+11. For crypt function, the #define _XOPEN_SOURCE has to be at the very top of your code (even before the #include list) for the code to compile. The #include <unistd.h> on the other hand can go anywhere you like in the #include list.
+12. The crypt function takes two inputs; text-to-encrypt and a salt. No matter how long the salt is, it will only take the first 2 characters and use it as a salt adding it to the hash, discarding the rest of the salt input by user. So for example, crypt(“text”, “12345”); will produce: 12hash.
+13. CS50 Sandbox is almost as twice as fast in the crack process as CS50 IDE. You should consider using CS50 Sandbox for long passwords to save time.
+Time taken by my code to crack the password “zzzzz” (which is last password on the list and takes the longest time) is 23 minutes on Sandbox vs. 41 minutes on IDE.
+14. When trying to crack the 10 hashes in the pset specs, leave the hashes for: bjbrown, lloyd and malan until you’re sure of your code, since they take considerably more time to crack than other hashes. Note that the hash for stelios has the salt of 51 not 50.
+You may want to use the command: time ./crack <hash> instead of just ./crack <hash>. time will tell you how much time it took to crack the password as a text output at the end of runtime.
